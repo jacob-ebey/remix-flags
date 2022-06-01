@@ -1,0 +1,11 @@
+CreateRole({
+  name: "GetProjectByIdUDF",
+  privileges: [
+    {
+      resource: Collection("Projects"),
+      actions: {
+        read: true
+      }
+    }
+  ]
+})

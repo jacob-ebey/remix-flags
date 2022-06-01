@@ -1,0 +1,19 @@
+CreateRole({
+  "name": "GetFlagsByProjectIdUDF",
+  "privileges": [{
+    "resource": Function("GetProjectById"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Index("FlagsByProjectId"),
+    "actions": {
+      "read": true
+    }
+  }, {
+    "resource": Collection("Flags"),
+    "actions": {
+      "read": true
+    }
+  }]
+})

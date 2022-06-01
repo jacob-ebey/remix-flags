@@ -1,0 +1,11 @@
+CreateRole({
+  name: "CreateProjectUDF",
+  privileges: [
+    {
+      resource: Collection("Projects"),
+      actions: {
+        create: true
+      }
+    }
+  ]
+})

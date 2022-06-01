@@ -1,0 +1,10 @@
+CreateFunction({
+  "name": "CreateProject",
+  "body": Query(Lambda(["name", "userId"], Create(Collection("Projects"), {
+    "data": {
+      "name": Var("name"),
+      "userId": Var("userId")
+    }
+  }))),
+  "role": Role("CreateProjectUDF")
+})

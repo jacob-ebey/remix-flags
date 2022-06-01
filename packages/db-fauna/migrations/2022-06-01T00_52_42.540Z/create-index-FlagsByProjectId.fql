@@ -1,0 +1,8 @@
+CreateIndex({
+  "name": "FlagsByProjectId",
+  "serialized": true,
+  "source": Collection("Flags"),
+  "terms": [{
+    "field": ["data", "projectId"]
+  }]
+})

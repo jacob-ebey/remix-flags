@@ -1,0 +1,18 @@
+CreateRole({
+  name: "DeleteTokenByIdUDF",
+  privileges: [
+    {
+      resource: Function("GetProjectById"),
+      actions: {
+        call: true
+      }
+    },
+    {
+      resource: Collection("Tokens"),
+      actions: {
+        read: true,
+        delete: true
+      }
+    }
+  ]
+})

@@ -1,0 +1,16 @@
+CreateFunction({
+  name: "CreateUser",
+  body: Query(Lambda(
+    ["email", "password"],
+    Create(
+      Collection('Users'),
+      {
+        credentials: { password: Var("password") },
+        data: {
+          email: Var("email")
+        }
+      }
+    )
+  )),
+  role: Role("CreateUserUDF")
+})

@@ -1,0 +1,17 @@
+CreateFunction({
+  name: "DeleteTokenById",
+  body: Query(Lambda(
+    ["tokenId", "userId"],
+    Let(
+      {
+        token: Get(Ref(Collection("Tokens"), Var("tokenId")))
+      },
+      If(
+        Equals(Call("GetProjectById", [Select(["data", "projectId"], Var("token")), Var("userId")]), false),
+        false,
+        Delete(Ref(Collection("Tokens"), Var("tokenId")))
+      )
+    )
+  )),
+  role: Role("DeleteTokenByIdUDF"),
+})

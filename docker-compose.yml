@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  db:
+    image: fauna/faunadb:latest
+    volumes:
+      - dbdata:/var/log/faunadb
+    restart: always
+    ports:
+      - 8443:8443
+
+volumes:
+  dbdata:

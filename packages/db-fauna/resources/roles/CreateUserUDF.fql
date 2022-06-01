@@ -1,0 +1,11 @@
+CreateRole({
+  name: "CreateUserUDF",
+  privileges: [
+    {
+      resource: Collection("Users"),
+      actions: {
+        create: true
+      }
+    }
+  ]
+})

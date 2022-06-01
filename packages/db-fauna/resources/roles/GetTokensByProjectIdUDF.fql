@@ -1,0 +1,23 @@
+CreateRole({
+  name: "GetTokensByProjectIdUDF",
+  privileges: [
+    {
+      resource: Function("GetProjectById"),
+      actions: {
+        call: true
+      }
+    },
+    {
+      resource: Index("TokensByProjectId"),
+      actions: {
+        read: true
+      }
+    },
+    {
+      resource: Collection("Tokens"),
+      actions: {
+        read: true
+      }
+    }
+  ]
+})

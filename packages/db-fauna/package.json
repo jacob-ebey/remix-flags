@@ -1,0 +1,25 @@
+{
+  "name": "db-fauna",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "index.ts",
+  "types": "index.ts",
+  "sideEffects": false,
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "db": "*",
+    "faunadb": "4.5.4",
+    "nanoid": "^3.3.4"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^3.10.0",
+    "@fauna-labs/fauna-schema-migrate": "^2.2.1",
+    "eslint": "^8.15.0",
+    "eslint-config-custom": "*",
+    "tsconfig": "*",
+    "typescript": "^4.6.4"
+  }
+}

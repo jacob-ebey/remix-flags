@@ -1,0 +1,10 @@
+CreateIndex({
+  name: "ProjectsByUserId",
+  serialized: true,
+  source: Collection("Projects"),
+  terms: [
+    {
+      field: ["data", "userId"]
+    }
+  ]
+})

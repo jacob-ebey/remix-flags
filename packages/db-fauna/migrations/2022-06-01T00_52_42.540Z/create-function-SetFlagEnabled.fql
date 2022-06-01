@@ -1,0 +1,11 @@
+CreateFunction({
+  "name": "SetFlagEnabled",
+  "body": Query(Lambda(["flagId", "enabled", "userId"], Let([{
+    "flag": Get(Ref(Collection("Flags"), Var("flagId")))
+  }], If(Equals(Call("GetProjectById", [Select(["data", "projectId"], Var("flag")), Var("userId")]), false), false, Update(Ref(Collection("Flags"), Var("flagId")), {
+    "data": {
+      "enabled": Var("enabled")
+    }
+  }))))),
+  "role": Role("SetFlagEnabledUDF")
+})

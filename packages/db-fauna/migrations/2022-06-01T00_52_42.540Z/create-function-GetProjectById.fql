@@ -1,0 +1,7 @@
+CreateFunction({
+  "name": "GetProjectById",
+  "body": Query(Lambda(["projectId", "userId"], Let([{
+    "project": Get(Ref(Collection("Projects"), Var("projectId")))
+  }], If(Equals(Var("userId"), Select(["data", "userId"], Var("project"))), Var("project"), false)))),
+  "role": Role("GetProjectByIdUDF")
+})

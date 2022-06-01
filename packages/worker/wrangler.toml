@@ -1,0 +1,11 @@
+compatibility_date = "2022-05-31"
+compatibility_flags = ["streams_enable_constructors"]
+name = "remix-flags"
+
+main = "entry.worker.ts"
+
+account_id = "574fdb1eae7e80782a805c4b92f6b626"
+routes = [{pattern = "*remix-flags.com/*", zone_name = "remix-flags.com"}]
+
+[site]
+bucket = "../remix-app/public"

@@ -1,0 +1,11 @@
+Update(Function("DeleteProjectById"), {
+  "body": Query(Lambda(["projectId", "userId"], Let([{
+    "project": Get(Ref(Collection("Projects"), Var("projectId")))
+  }, {
+    "flags": Call("GetFlagsByProjectId", [Var("projectId"), Var("userId")])
+  }, {
+    "tokens": Call("GetTokensByProjectId", [Var("projectId"), Var("userId")])
+  }], If(Equals(Var("userId"), Select(["data", "userId"], Var("project"))), Do(Map(Var("flags"), Lambda(["flag"], Delete(Select(["ref"], Var("flag"))))), Map(Var("tokens"), Lambda(["token"], Delete(Select(["ref"], Var("token"))))), Delete(Ref(Collection("Projects"), Var("projectId")))), false)))),
+  "role": Role("DeleteProjectByIdUDF"),
+  "data": null
+})

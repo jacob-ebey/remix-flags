@@ -1,0 +1,15 @@
+CreateRole({
+  "name": "DeleteFlagByIdUDF",
+  "privileges": [{
+    "resource": Function("GetProjectById"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Collection("Flags"),
+    "actions": {
+      "read": true,
+      "delete": true
+    }
+  }]
+})

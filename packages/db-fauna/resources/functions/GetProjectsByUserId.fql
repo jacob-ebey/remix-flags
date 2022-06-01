@@ -1,0 +1,14 @@
+CreateFunction({
+  name: "GetProjectsByUserId",
+  body: Query(Lambda(
+    ["userId"],
+    Map(
+      Paginate(Match(Index("ProjectsByUserId"), Var("userId"))),
+      Lambda(
+        ["project"],
+        Get(Var("project"))
+      )
+    )
+  )),
+  role: Role("GetProjectsByUserIdUDF")
+})

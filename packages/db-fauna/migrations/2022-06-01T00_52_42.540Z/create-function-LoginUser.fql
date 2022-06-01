@@ -1,0 +1,7 @@
+CreateFunction({
+  "name": "LoginUser",
+  "body": Query(Lambda(["email", "password"], Login(Match(Index("UserByEmail"), Var("email")), {
+    "password": Var("password")
+  }))),
+  "role": Role("LoginUserUDF")
+})

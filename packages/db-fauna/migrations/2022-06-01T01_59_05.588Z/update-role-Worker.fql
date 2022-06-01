@@ -1,0 +1,98 @@
+Update(Role("Worker"), {
+  "privileges": [{
+    "resource": Function("CreateFlag"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("CreateProject"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("CreateUser"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("DeleteFlagById"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("SetFlagEnabled"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("DeleteProjectById"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("GetFlagById"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("DeleteTokenById"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("GetProjectById"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("GetFlagsByProjectId"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("GetFlagsByProjectIdWithToken"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("GetTokenById"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("GetTokensByProjectId"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("CreateToken"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("GetProjectsByUserId"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Function("LoginUser"),
+    "actions": {
+      "call": true
+    }
+  }, {
+    "resource": Collection("Projects"),
+    "actions": {
+      "read": true,
+      "write": true,
+      "delete": true
+    }
+  }, {
+    "resource": Collection("Users"),
+    "actions": {
+      "read": true,
+      "write": true
+    }
+  }],
+  "data": null,
+  "membership": null
+})

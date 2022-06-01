@@ -1,0 +1,9 @@
+CreateFunction({
+  "name": "GetTokenById",
+  "body": Query(Lambda(["tokenId", "userId"], Let([{
+    "token": Get(Ref(Collection("Tokens"), Var("tokenId")))
+  }, {
+    "project": Call("GetProjectById", [Select(["data", "projectId"], Var("token")), Var("userId")])
+  }], If(Equals(Var("project"), false), false, Var("token"))))),
+  "role": Role("GetTokenByIdUDF")
+})

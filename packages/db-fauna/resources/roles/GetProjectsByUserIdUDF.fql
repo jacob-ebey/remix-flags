@@ -1,0 +1,17 @@
+CreateRole({
+  name: "GetProjectsByUserIdUDF",
+  privileges: [
+    {
+      resource: Index("ProjectsByUserId"),
+      actions: {
+        read: true
+      }
+    },
+    {
+      resource: Collection("Projects"),
+      actions: {
+        read: true
+      }
+    }
+  ]
+})

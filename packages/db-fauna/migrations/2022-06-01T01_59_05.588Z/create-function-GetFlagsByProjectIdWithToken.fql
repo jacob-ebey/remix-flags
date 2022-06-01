@@ -1,0 +1,7 @@
+CreateFunction({
+  "name": "GetFlagsByProjectIdWithToken",
+  "body": Query(Lambda(["projectId", "secret"], Let([{
+    "token": Get(Match(Index("TokenBySecret"), Var("secret")))
+  }], If(Equals(Select(["data", "projectId"], Var("token")), Var("projectId")), Var("token"), false)))),
+  "role": Role("GetFlagsByProjectIdWithTokenUDF")
+})

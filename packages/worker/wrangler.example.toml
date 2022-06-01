@@ -1,0 +1,15 @@
+compatibility_date = "2022-05-31"
+compatibility_flags = ["streams_enable_constructors"]
+
+main = "entry.worker.ts"
+
+workers_dev = true
+
+[site]
+bucket = "../remix-app/public"
+
+[env.dev.vars]
+FAUNA_SECRET = "secret"
+# If you are using a DB hosted on fauna, you can omit FAUNA_URL
+FAUNA_URL = "http://localhost:8443"
+SESSION_SECRET = "should-be-secure-in-prod"

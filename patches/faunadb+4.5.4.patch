@@ -1,0 +1,15 @@
+diff --git a/node_modules/faunadb/package.json b/node_modules/faunadb/package.json
+index a63a0e4..3cd1b88 100644
+--- a/node_modules/faunadb/package.json
++++ b/node_modules/faunadb/package.json
+@@ -22,6 +22,10 @@
+     "tools/printReleaseNotes.js"
+   ],
+   "main": "index.js",
++  "exports": {
++    "require": "./index.js",
++    "default": "./dist/faunadb.js"
++  },
+   "scripts": {
+     "doc": "jsdoc -c ./jsdoc.json",
+     "browserify": "browserify index.js --standalone faunadb -o dist/faunadb.js",

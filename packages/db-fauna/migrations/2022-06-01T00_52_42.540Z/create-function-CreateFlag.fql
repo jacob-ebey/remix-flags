@@ -1,0 +1,11 @@
+CreateFunction({
+  "name": "CreateFlag",
+  "body": Query(Lambda(["name", "enabled", "projectId", "userId"], If(Equals(Call("GetProjectById", [Var("projectId"), Var("userId")]), false), false, Create(Collection("Flags"), {
+    "data": {
+      "name": Var("name"),
+      "enabled": Var("enabled"),
+      "projectId": Var("projectId")
+    }
+  })))),
+  "role": Role("CreateFlagUDF")
+})

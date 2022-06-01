@@ -1,0 +1,11 @@
+CreateFunction({
+  "name": "CreateToken",
+  "body": Query(Lambda(["name", "secret", "projectId", "userId"], If(Equals(Call("GetProjectById", [Var("projectId"), Var("userId")]), false), false, Create(Collection("Tokens"), {
+    "data": {
+      "name": Var("name"),
+      "secret": Var("secret"),
+      "projectId": Var("projectId")
+    }
+  })))),
+  "role": Role("CreateTokenUDF")
+})

@@ -1,0 +1,24 @@
+CreateRole({
+  "name": "GetFlagsByProjectIdWithTokenUDF",
+  "privileges": [{
+    "resource": Index("TokenBySecret"),
+    "actions": {
+      "read": true
+    }
+  }, {
+    "resource": Index("FlagsByProjectId"),
+    "actions": {
+      "read": true
+    }
+  }, {
+    "resource": Collection("Tokens"),
+    "actions": {
+      "read": true
+    }
+  }, {
+    "resource": Collection("Flags"),
+    "actions": {
+      "read": true
+    }
+  }]
+})

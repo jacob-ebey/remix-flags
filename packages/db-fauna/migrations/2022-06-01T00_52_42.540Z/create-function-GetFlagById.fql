@@ -1,0 +1,9 @@
+CreateFunction({
+  "name": "GetFlagById",
+  "body": Query(Lambda(["flagId", "userId"], Let([{
+    "flag": Get(Ref(Collection("Flags"), Var("flagId")))
+  }, {
+    "project": Call("GetProjectById", [Select(["data", "projectId"], Var("flag")), Var("userId")])
+  }], If(Equals(Var("project"), false), false, Var("flag"))))),
+  "role": Role("GetFlagByIdUDF")
+})

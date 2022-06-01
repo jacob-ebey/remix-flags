@@ -1,0 +1,17 @@
+CreateFunction({
+  name: "DeleteFlagById",
+  body: Query(Lambda(
+    ["flagId", "userId"],
+    Let(
+      {
+        flag: Get(Ref(Collection("Flags"), Var("flagId")))
+      },
+      If(
+        Equals(Call("GetProjectById", [Select(["data", "projectId"], Var("flag")), Var("userId")]), false),
+        false,
+        Delete(Ref(Collection("Flags"), Var("flagId")))
+      )
+    )
+  )),
+  role: Role("DeleteFlagByIdUDF"),
+})

@@ -1,0 +1,7 @@
+Update(Function("GetFlagsByProjectIdWithToken"), {
+  "body": Query(Lambda(["projectId", "secret"], Let([{
+    "token": Get(Match(Index("TokenBySecret"), Var("secret")))
+  }], If(Equals(Select(["data", "projectId"], Var("token")), Var("projectId")), Map(Paginate(Match(Index("FlagsByProjectId"), Var("projectId"))), Lambda(["flag"], Get(Var("flag")))), [])))),
+  "role": Role("GetFlagsByProjectIdWithTokenUDF"),
+  "data": null
+})

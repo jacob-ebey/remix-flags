@@ -1,0 +1,5 @@
+CreateFunction({
+  "name": "GetTokensByProjectId",
+  "body": Query(Lambda(["projectId", "userId"], If(Equals(Call("GetProjectById", [Var("projectId"), Var("userId")]), false), [], Map(Paginate(Match(Index("TokensByProjectId"), Var("projectId"))), Lambda(["token"], Get(Var("token"))))))),
+  "role": Role("GetTokensByProjectIdUDF")
+})

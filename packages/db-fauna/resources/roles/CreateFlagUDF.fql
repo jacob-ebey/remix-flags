@@ -1,0 +1,17 @@
+CreateRole({
+  name: "CreateFlagUDF",
+  privileges: [
+    {
+      resource: Function("GetProjectById"),
+      actions: {
+        call: true
+      }
+    },
+    {
+      resource: Collection("Flags"),
+      actions: {
+        create: true
+      }
+    }
+  ]
+})

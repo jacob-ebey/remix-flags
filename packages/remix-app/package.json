@@ -1,0 +1,39 @@
+{
+  "name": "remix-app",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "build/index.js",
+  "types": "types/build.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "remix build",
+    "clean": "rimraf ./.cache ./build ./public/build",
+    "dev": "remix watch",
+    "lint": "eslint .",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "remix": "npm:@remix-run/cloudflare@0.0.0-experimental-9784dd06",
+    "@remix-run/react": "0.0.0-experimental-9784dd06",
+    "db": "*",
+    "db-fauna": "*",
+    "isbot": "^3.5.0",
+    "nprogress": "^0.2.0",
+    "react": "next",
+    "react-dom": "next"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^3.10.0",
+    "@remix-run/dev": "0.0.0-experimental-9784dd06",
+    "@types/nprogress": "^0.2.0",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.4",
+    "cloudflare-env": "*",
+    "eslint": "^8.15.0",
+    "eslint-config-custom": "*",
+    "remix-flat-routes": "^0.4.0",
+    "rimraf": "^3.0.2",
+    "tsconfig": "*",
+    "typescript": "^4.6.4"
+  }
+}

@@ -1,0 +1,5 @@
+Update(Function("GetFlagsByProjectId"), {
+  "body": Query(Lambda(["projectId", "userId"], If(Equals(Call("GetProjectById", [Var("projectId"), Var("userId")]), false), false, Map(Paginate(Match(Index("FlagsByProjectId"), Var("projectId"))), Lambda(["flag"], Get(Var("flag"))))))),
+  "role": Role("GetFlagsByProjectIdUDF"),
+  "data": null
+})
