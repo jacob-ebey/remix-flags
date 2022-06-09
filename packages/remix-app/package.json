@@ -18,6 +18,7 @@
     "db": "*",
     "db-fauna": "*",
     "isbot": "^3.5.0",
+    "logger": "*",
     "nprogress": "^0.2.0",
     "react": "next",
     "react-dom": "next"

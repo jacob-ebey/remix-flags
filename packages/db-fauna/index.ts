@@ -3,8 +3,9 @@ import type { ClientConfig, values } from "faunadb";
 import { nanoid } from "nanoid";
 
 import type { Db } from "db";
+import type { Logger } from "logger";
 
-export function createDb(config: ClientConfig): Db {
+export function createDb(config: ClientConfig, logger: Logger): Db {
   let client = new Client(config);
 
   return {
@@ -112,8 +113,8 @@ export function createDb(config: ClientConfig): Db {
           name: item.data.name,
         }));
       } catch (error) {
-        console.log(String(error));
-        throw error;
+        logger.captureException(error);
+        return null;
       }
     },
 
@@ -147,8 +148,8 @@ export function createDb(config: ClientConfig): Db {
           enabled: result.data.enabled,
         };
       } catch (error) {
-        console.log(String(error));
-        throw error;
+        logger.captureException(error);
+        return null;
       }
     },
     getFlagsByProjectId: async ({ projectId, userId }) => {
@@ -216,8 +217,8 @@ export function createDb(config: ClientConfig): Db {
           name: result.data.name,
         };
       } catch (error) {
-        console.log(String(error));
-        throw error;
+        logger.captureException(error);
+        return null;
       }
     },
     getTokensByProjectId: async ({ projectId, userId }) => {

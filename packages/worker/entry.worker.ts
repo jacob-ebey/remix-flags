@@ -3,6 +3,8 @@ import {
   createRequestHandler,
   createCookieSessionStorage,
 } from "@remix-run/cloudflare";
+import Toucan from "toucan-js";
+
 import manifestJSON from "__STATIC_CONTENT_MANIFEST";
 
 import { createDb } from "db-fauna";
@@ -19,7 +21,7 @@ export default {
   async fetch(
     request: Request,
     env: Env,
-    ctx: ExecutionContext
+    context: ExecutionContext
   ): Promise<Response> {
     let url = new URL(request.url);
 
@@ -31,7 +33,7 @@ export default {
         {
           request: request.clone(),
           waitUntil(promise) {
-            return ctx.waitUntil(promise);
+            return context.waitUntil(promise);
           },
         },
         {
@@ -51,6 +53,14 @@ export default {
       // }
     }
 
+    const sentry = new Toucan({
+      dsn: env.SENTRY_DSN,
+      context, // Includes 'waitUntil', which is essential for Sentry logs to be delivered. Modules workers do not include 'request' in context -- you'll need to set it separately.
+      request, // request is not included in 'context', so we set it here.
+      allowedHeaders: ["user-agent"],
+      allowedSearchParams: /(.*)/,
+    });
+
     try {
       let domain, port, scheme;
       if (env.FAUNA_URL) {
@@ -62,7 +72,10 @@ export default {
           scheme = undefined;
         }
       }
-      let db = createDb({ domain, port, scheme, secret: env.FAUNA_SECRET });
+      let db = createDb(
+        { domain, port, scheme, secret: env.FAUNA_SECRET },
+        sentry
+      );
       let sessionStorage = createCookieSessionStorage({
         cookie: {
           httpOnly: true,
@@ -82,6 +95,7 @@ export default {
         cache: caches.default,
         db,
         env,
+        logger: sentry,
         session,
       };
       let response = await handleRemixRequest(request, loadContext);
@@ -95,7 +109,7 @@ export default {
         statusText: response.statusText,
       });
     } catch (error) {
-      console.log(String(error));
+      sentry.captureException(error);
       return new Response("An unexpected error occurred", { status: 500 });
     }
   },

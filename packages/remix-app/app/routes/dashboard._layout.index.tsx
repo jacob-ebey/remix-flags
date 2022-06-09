@@ -1,4 +1,4 @@
-import { deferred } from "remix";
+import { deferred, json } from "remix";
 import { Link, useLoaderData } from "@remix-run/react";
 
 import type { LoaderFunction } from "~/types";
@@ -13,6 +13,8 @@ export let loader: LoaderFunction = async ({ context: { db, session } }) => {
   let userId = requireUserId(session, "/dashboard");
 
   let projects = await db.getProjectsByUserId(userId);
+
+  if (!projects) throw json(null, { status: 404, statusText: "Not Found" });
 
   let projectFlags = projects.slice(0, 5).reduce(
     (acc, project) => ({

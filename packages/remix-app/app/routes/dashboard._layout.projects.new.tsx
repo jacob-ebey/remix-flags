@@ -13,7 +13,7 @@ type ActionData = {
 };
 
 export let action: ActionFunction = async ({
-  context: { db, session },
+  context: { db, logger, session },
   request,
 }) => {
   let userId = requireUserId(session, "/projects/new");
@@ -34,7 +34,7 @@ export let action: ActionFunction = async ({
     let projectId = await db.createProject({ userId, name });
     return redirect(`/dashboard/project/${projectId}`);
   } catch (error) {
-    console.log(String(error));
+    logger.captureException(error);
     return json<ActionData>({
       errors: { global: "An error occurred. Please try again later." },
     });

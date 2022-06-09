@@ -17,7 +17,7 @@ export let handle = {
 };
 
 export let action: ActionFunction = async ({
-  context: { db, session },
+  context: { db, logger, session },
   params: { projectId },
   request,
 }) => {
@@ -44,7 +44,7 @@ export let action: ActionFunction = async ({
     await db.createFlag({ userId, name, enabled, projectId });
     return redirect(`/dashboard/project/${projectId}`);
   } catch (error) {
-    console.log(String(error));
+    logger.captureException(error);
     return json<ActionData>({
       errors: { global: "An error occurred. Please try again later." },
     });

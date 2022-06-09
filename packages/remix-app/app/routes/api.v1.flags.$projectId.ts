@@ -2,7 +2,7 @@ import { json } from "remix";
 import type { LoaderFunction } from "~/types";
 
 export let loader: LoaderFunction = async ({
-  context: { cache, db },
+  context: { cache, db, logger },
   params: { projectId },
   request,
 }) => {
@@ -28,6 +28,9 @@ export let loader: LoaderFunction = async ({
     }
 
     let flags = await db.getFlagsByProjectIdWithToken({ projectId, token });
+
+    if (!flags) throw json(null, { status: 404, statusText: "Not Found" });
+
     let data = flags.reduce(
       (acc, flag) => ({
         ...acc,
@@ -57,7 +60,7 @@ export let loader: LoaderFunction = async ({
       }
     );
   } catch (error) {
-    console.log(String(error));
+    logger.captureException(error);
     return json({ error: "An unexpected error occurred" }, { status: 500 });
   }
 };

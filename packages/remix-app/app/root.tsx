@@ -165,7 +165,7 @@ export function CatchBoundary() {
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
-  console.log(String(error));
+  console.error(error);
 
   return (
     <Document>

@@ -1,0 +1,44 @@
+diff --git a/node_modules/@remix-run/server-runtime/esm/server.js b/node_modules/@remix-run/server-runtime/esm/server.js
+index 5ba508c..e8202cd 100644
+--- a/node_modules/@remix-run/server-runtime/esm/server.js
++++ b/node_modules/@remix-run/server-runtime/esm/server.js
+@@ -410,7 +410,7 @@ async function handleDocumentRequest({
+   let handleDocumentRequest = build.entry.module.default;
+ 
+   try {
+-    return await handleDocumentRequest(request, responseStatusCode, responseHeaders, entryContext);
++    return await handleDocumentRequest(request, responseStatusCode, responseHeaders, entryContext, loadContext);
+   } catch (error) {
+     responseStatusCode = 500; // Go again, this time with the componentDidCatch emulation. As it rendered
+     // last time we mutated `componentDidCatch.routeId` for the last rendered
+@@ -424,7 +424,7 @@ async function handleDocumentRequest({
+     entryContext.serverHandoffString = createServerHandoffString(serverHandoff);
+ 
+     try {
+-      return await handleDocumentRequest(request, responseStatusCode, responseHeaders, entryContext);
++      return await handleDocumentRequest(request, responseStatusCode, responseHeaders, entryContext, loadContext);
+     } catch (error) {
+       if (serverMode !== ServerMode.Test) {
+         console.error(error);
+diff --git a/node_modules/@remix-run/server-runtime/server.js b/node_modules/@remix-run/server-runtime/server.js
+index 659c2b6..f072d37 100644
+--- a/node_modules/@remix-run/server-runtime/server.js
++++ b/node_modules/@remix-run/server-runtime/server.js
+@@ -414,7 +414,7 @@ async function handleDocumentRequest({
+   let handleDocumentRequest = build.entry.module.default;
+ 
+   try {
+-    return await handleDocumentRequest(request, responseStatusCode, responseHeaders, entryContext);
++    return await handleDocumentRequest(request, responseStatusCode, responseHeaders, entryContext, loadContext);
+   } catch (error) {
+     responseStatusCode = 500; // Go again, this time with the componentDidCatch emulation. As it rendered
+     // last time we mutated `componentDidCatch.routeId` for the last rendered
+@@ -428,7 +428,7 @@ async function handleDocumentRequest({
+     entryContext.serverHandoffString = serverHandoff.createServerHandoffString(serverHandoff$1);
+ 
+     try {
+-      return await handleDocumentRequest(request, responseStatusCode, responseHeaders, entryContext);
++      return await handleDocumentRequest(request, responseStatusCode, responseHeaders, entryContext, loadContext);
+     } catch (error) {
+       if (serverMode !== mode.ServerMode.Test) {
+         console.error(error);

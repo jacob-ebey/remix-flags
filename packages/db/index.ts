@@ -35,7 +35,7 @@ export interface Db {
     userId: string;
     projectId: string;
   }): Promise<Project | null>;
-  getProjectsByUserId(userId: string): Promise<Project[]>;
+  getProjectsByUserId(userId: string): Promise<Project[] | null>;
 
   // Flag functions
   createFlag(args: {
@@ -55,7 +55,7 @@ export interface Db {
   getFlagsByProjectIdWithToken(args: {
     projectId: string;
     token: string;
-  }): Promise<Flag[]>;
+  }): Promise<Flag[] | null>;
   getFlagById(args: { flagId: string; userId: string }): Promise<Flag | null>;
   setFlagEnabled(args: {
     flagId: string;
@@ -75,7 +75,7 @@ export interface Db {
   getTokensByProjectId(args: {
     projectId: string;
     userId: string;
-  }): Promise<Token[]>;
+  }): Promise<Token[] | null>;
   createToken(args: {
     name: string;
     projectId: string;

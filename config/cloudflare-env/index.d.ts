@@ -3,5 +3,6 @@ interface Env {
 
   FAUNA_SECRET: string;
   FAUNA_URL?: string;
+  SENTRY_DSN?: string;
   SESSION_SECRET: string;
 }

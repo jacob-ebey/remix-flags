@@ -1,19 +1,15 @@
 {
-  "name": "db-fauna",
+  "name": "logger",
   "version": "0.0.0",
   "license": "MIT",
   "main": "index.ts",
   "types": "index.ts",
-  "sideEffects": false,
   "scripts": {
     "lint": "eslint .",
     "typecheck": "tsc -b"
   },
   "dependencies": {
-    "db": "*",
-    "faunadb": "4.5.4",
-    "logger": "*",
-    "nanoid": "^3.3.4"
+    "faunadb": "^4.5.4"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^3.10.0",

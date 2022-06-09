@@ -11,7 +11,8 @@
     "@cloudflare/kv-asset-handler": "^0.2.0",
     "@remix-run/cloudflare": "0.0.0-experimental-9784dd06",
     "db-fauna": "*",
-    "remix-app": "*"
+    "remix-app": "*",
+    "toucan-js": "^2.6.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^3.11.0",
