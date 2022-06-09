@@ -19,40 +19,50 @@ type ActionData = {
 };
 
 export let action: ActionFunction = async ({
-  context: { db, session },
+  context: { db, logger, session },
   request,
 }) => {
-  let formData = await request.formData();
-  let email = String(formData.get("email"));
-  let password = String(formData.get("password"));
+  try {
+    let formData = await request.formData();
+    let email = String(formData.get("email"));
+    let password = String(formData.get("password"));
 
-  let errors: ActionData["errors"];
-  if (!email.match(/^.+@.+\..+$/)) {
-    errors = { ...errors, email: "Invalid email" };
-  }
+    let errors: ActionData["errors"];
+    if (!email.match(/^.+@.+\..+$/)) {
+      errors = { ...errors, email: "Invalid email" };
+    }
 
-  if (!password.match(/^.{8,}$/)) {
-    errors = { ...errors, password: "Password must be at least 8 characters" };
-  }
+    if (!password.match(/^.{8,}$/)) {
+      errors = {
+        ...errors,
+        password: "Password must be at least 8 characters",
+      };
+    }
 
-  if (errors) return json<ActionData>({ errors });
+    if (errors) return json<ActionData>({ errors });
 
-  let user = await db.login({ email, password });
+    let user = await db.login({ email, password });
 
-  if (!user) {
+    if (!user) {
+      return json<ActionData>({
+        errors: { global: "An error occurred. Invalid email or password?" },
+      });
+    }
+
+    session.set("userId", user.id);
+
+    let url = new URL(request.url);
+    let redirectTo = url.searchParams.get("redirect") || "/";
+    if (!redirectTo.startsWith("/") || redirectTo.charAt(1) === "/")
+      redirectTo = "/";
+
+    return redirect(redirectTo);
+  } catch (error) {
+    logger.captureException(error);
     return json<ActionData>({
-      errors: { global: "An error occurred. Invalid email or password?" },
+      errors: { global: "An unknown error occurred." },
     });
   }
-
-  session.set("userId", user.id);
-
-  let url = new URL(request.url);
-  let redirectTo = url.searchParams.get("redirect") || "/";
-  if (!redirectTo.startsWith("/") || redirectTo.charAt(1) === "/")
-    redirectTo = "/";
-
-  return redirect(redirectTo);
 };
 
 export default function Login() {

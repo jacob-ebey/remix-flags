@@ -62,20 +62,17 @@ export default {
     });
 
     try {
-      let domain, port, scheme;
+      let otherOptions: any = {};
       if (env.FAUNA_URL) {
         let url = new URL(env.FAUNA_URL);
-        domain = url.hostname;
-        port = url.port ? Number(url.port) : undefined;
-        scheme = url.protocol.split(":", 1)[0];
-        if (scheme !== "http" && scheme !== "https") {
-          scheme = undefined;
+        otherOptions.domain = url.hostname;
+        otherOptions.port = url.port ? Number(url.port) : undefined;
+        otherOptions.scheme = url.protocol.split(":", 1)[0];
+        if (otherOptions.scheme !== "http" && otherOptions.scheme !== "https") {
+          otherOptions.scheme = undefined;
         }
       }
-      let db = createDb(
-        { domain, port, scheme, secret: env.FAUNA_SECRET },
-        sentry
-      );
+      let db = createDb({ ...otherOptions, secret: env.FAUNA_SECRET }, sentry);
       let sessionStorage = createCookieSessionStorage({
         cookie: {
           httpOnly: true,
