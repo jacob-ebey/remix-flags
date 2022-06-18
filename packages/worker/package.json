@@ -21,6 +21,6 @@
     "eslint-config-custom": "*",
     "tsconfig": "*",
     "typescript": "^4.7.3",
-    "wrangler": "^2.0.8"
+    "wrangler": "^2.0.14"
   }
 }
