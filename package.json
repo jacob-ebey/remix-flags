@@ -8,18 +8,17 @@
   ],
   "scripts": {
     "postinstall": "patch-package",
-    "build": "turbo run build",
-    "clean": "turbo run clean",
-    "dev": "turbo run dev --parallel",
+    "build": "npx --yes turbo run build",
+    "clean": "npx --yes turbo run clean",
+    "dev": "npx --yes turbo run dev --parallel",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md}\"",
-    "lint": "turbo run lint",
-    "typecheck": "turbo run typecheck",
-    "migrate": "turbo run migrate"
+    "lint": "npx --yes turbo run lint",
+    "typecheck": "npx --yes turbo run typecheck",
+    "migrate": "npx --yes turbo run migrate"
   },
   "devDependencies": {
     "patch-package": "^6.4.7",
     "prettier": "^2.6.2",
-    "turbo": "^1.2.16",
     "typescript": "^4.6.4"
   },
   "packageManager": "npm@8.5.5",
