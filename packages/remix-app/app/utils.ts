@@ -4,6 +4,13 @@ import type { Session } from "remix";
 import { redirect } from "remix";
 import { Deferred, useDeferred } from "@remix-run/react";
 
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export interface Deferrable<Data> {}
+export type ResolvedDeferrable<Data> = Data extends Deferrable<infer Data>
+  ? Awaited<Data>
+  : Awaited<Data>;
+
 export function getUserId(session: Session): string | null {
   return session.get("userId") || null;
 }
@@ -18,16 +25,17 @@ export function requireUserId(
   return userId;
 }
 
-export function InlineDeferred<TData>({
+export function InlineDeferred<Data>({
   children,
   data,
   fallback,
   error,
 }: {
-  children: ({ value }: { value: TData }) => any;
-} & Omit<ComponentProps<typeof Deferred>, "children">) {
+  data: Data;
+  children: (value: ResolvedDeferrable<Data>) => any;
+} & Omit<ComponentProps<typeof Deferred>, "children" | "data">) {
   function DeferredWrapper() {
-    return children({ value: useDeferred() });
+    return children(useDeferred() as ResolvedDeferrable<Data>);
   }
   return createElement(Deferred, {
     data,
@@ -35,38 +43,4 @@ export function InlineDeferred<TData>({
     error,
     children: createElement(DeferredWrapper),
   });
-}
-
-export async function getRepos({
-  githubAccessToken,
-}: {
-  githubAccessToken: string;
-}) {
-  let gitHubUserResponse = await fetch("https://api.github.com/user", {
-    headers: {
-      Accept: "application/vnd.github.v3+json",
-      Authorization: `token ${githubAccessToken}`,
-      "User-Agent": "github-md",
-    },
-  });
-  let { repos_url: reposUrl } = (await gitHubUserResponse.json()) as {
-    repos_url: string;
-  };
-  let githubReposResponse = await fetch(
-    reposUrl + "?per_page=500&type=all&sort=pushed",
-    {
-      headers: {
-        Accept: "application/vnd.github.v3+json",
-        Authorization: `token ${githubAccessToken}`,
-        "User-Agent": "github-md",
-      },
-    }
-  );
-  let gitHubRepos = (await githubReposResponse.json()) as {
-    full_name: string;
-  }[];
-
-  let repos = gitHubRepos.map((repo) => repo.full_name);
-
-  return repos;
 }

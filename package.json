@@ -13,7 +13,8 @@
     "dev": "npx --yes turbo run dev --parallel",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md}\"",
     "lint": "npx --yes turbo run lint",
-    "typecheck": "npx --yes turbo run typecheck"
+    "typecheck": "npx --yes turbo run typecheck",
+    "migrate": "npx --yes turbo run migrate"
   },
   "devDependencies": {
     "patch-package": "^6.4.7",

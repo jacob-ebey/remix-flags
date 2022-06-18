@@ -7,7 +7,8 @@
   "sideEffects": false,
   "scripts": {
     "lint": "eslint .",
-    "typecheck": "tsc -b"
+    "typecheck": "tsc -b",
+    "migrate": "fauna-schema-migrate apply"
   },
   "dependencies": {
     "db": "*",

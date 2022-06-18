@@ -2,11 +2,12 @@ import { deferred, json } from "remix";
 import { Link, useLoaderData } from "@remix-run/react";
 
 import type { LoaderFunction } from "~/types";
+import type { Deferrable } from "~/utils";
 import { InlineDeferred, requireUserId } from "~/utils";
 
 type LoaderData = {
   projects: { id: string; name: string }[];
-  [key: string]: unknown;
+  [key: string]: Deferrable<{ enabled: boolean }[]>;
 };
 
 export let loader: LoaderFunction = async ({ context: { db, session } }) => {
@@ -60,7 +61,7 @@ export default function ProjectsDashboard() {
                 <td>
                   <Link to={`project/${id}`}>{id}</Link>
                 </td>
-                <InlineDeferred<{ enabled: boolean }[]>
+                <InlineDeferred
                   data={deferredLoaderData[id]}
                   error={
                     <>
@@ -75,7 +76,7 @@ export default function ProjectsDashboard() {
                     </>
                   }
                 >
-                  {({ value: flags }) =>
+                  {(flags) =>
                     flags ? (
                       <>
                         <td>

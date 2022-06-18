@@ -15,6 +15,9 @@
     },
     "typecheck": {
       "outputs": ["tsconfig.tsbuildinfo"]
+    },
+    "migrate": {
+      "cache": false
     }
   }
 }

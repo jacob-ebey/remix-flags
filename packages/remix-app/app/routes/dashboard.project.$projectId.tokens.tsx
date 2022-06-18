@@ -66,6 +66,8 @@ export let loader: LoaderFunction = async ({
 
   let tokens = await db.getTokensByProjectId({ projectId, userId });
 
+  if (!tokens) throw json(null, { status: 404, statusText: "Not Found" });
+
   return json<LoaderData>({ tokens });
 };
 
