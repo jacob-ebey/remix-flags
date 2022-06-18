@@ -83,7 +83,10 @@ export default function ProjectDashboard() {
               <NavLink className="sm-12 paper-btn" to="tokens#tokens">
                 API Tokens
               </NavLink>
-              <NavLink className="sm-12 paper-btn btn-danger" to="delete#delete-project">
+              <NavLink
+                className="sm-12 paper-btn btn-danger"
+                to="delete#delete-project"
+              >
                 Delete Project
               </NavLink>
             </div>
