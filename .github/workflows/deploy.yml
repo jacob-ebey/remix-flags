@@ -23,6 +23,8 @@ jobs:
 
       - name: 🛫 Migrate database
         run: npm run migrate
+        env:
+          FAUNA_ADMIN_KEY: ${{ secrets.FAUNA_ADMIN_KEY }}
 
       - name: 🚀 Publish
         uses: cloudflare/wrangler-action@2.0.0
