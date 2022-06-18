@@ -2,6 +2,19 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
+      "inputs": [
+        "package.json",
+        "remix.config.js",
+        "tsconfig.json",
+        "app/**/*.js",
+        "app/**/*.jsx",
+        "app/**/*.tsx",
+        "app/**/*.ts",
+        "app/**/*.css",
+        "migrations/**/*.fql",
+        "resources/**/*.fql",
+        ".fauna-migrate.js"
+      ],
       "outputs": ["build/**", "public/build/**", ".cache/**"]
     },
     "clean": {
@@ -11,9 +24,28 @@
       "cache": false
     },
     "lint": {
+      "inputs": [
+        "package.json",
+        ".eslintrc.js",
+        "**/*.jsx",
+        "**/*.js",
+        "**/*.tsx",
+        "**/*.ts",
+        "**/*.css",
+        "**/*.css",
+        "**/*.md"
+      ],
       "outputs": []
     },
     "typecheck": {
+      "inputs": [
+        "package.json",
+        "tsconfig.json",
+        "**/*.jsx",
+        "**/*.js",
+        "**/*.tsx",
+        "**/*.ts"
+      ],
       "outputs": ["tsconfig.tsbuildinfo"]
     },
     "migrate": {

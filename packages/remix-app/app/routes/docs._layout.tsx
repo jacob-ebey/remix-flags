@@ -50,8 +50,13 @@ export default function DocsLayout() {
         <aside className="paper">
           <h3 className="text-center">Documentation</h3>
           <div className="row flex-center">
-            {data.navigation.map(({ label, to }) => (
-              <NavLink className="sm-12 paper-btn" to={to} end={to === "/docs"}>
+            {data.navigation.map(({ label, to }, index) => (
+              <NavLink
+                key={`${index}-${label}-${to}`}
+                className="sm-12 paper-btn"
+                to={to}
+                end={to === "/docs"}
+              >
                 {label}
               </NavLink>
             ))}
