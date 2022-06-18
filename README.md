@@ -1,6 +1,6 @@
 # remix-flags
 
-Eventually* Everything you'll need for successful feature flagging
+_Eventually_ Everything you'll need for successful feature flagging
 
 ## What's inside?
 
@@ -58,6 +58,20 @@ To develop all apps and packages, run the following command:
 ```
 npm run dev
 ```
+
+### Deployment
+
+Deployment is done through GitHub Actions. Deployments are triggered whenever you merge to the `main` branch.
+
+The following GitHub action secrets are required:
+
+- `CF_API_TOKEN`: your Cloudflare API token used for deployment
+- `FAUNA_ADMIN_KEY`: your FaunaDB admin key used for migrations
+
+The following GitHub action secrets are optional:
+
+- `TURBO_TEAM`: your Turbo team ID used for remote caching
+- `TURBO_TOKEN`: your Turbo token used for remote caching
 
 ### Remote Caching
 
